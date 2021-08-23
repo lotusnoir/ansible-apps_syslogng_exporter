@@ -1,0 +1,5 @@
+---
+- name: "restart syslogng_exporter"
+  service:
+    name: "syslogng_exporter"
+    state: "restarted"

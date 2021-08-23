@@ -1,0 +1,3 @@
+---
+syslogng_exporter_version: "0.1.1"
+syslogng_exporter_url: "https://github.com/lotusnoir/syslog_ng_exporter/releases/download/{{ syslogng_exporter_version }}/syslog_ng_exporter"
