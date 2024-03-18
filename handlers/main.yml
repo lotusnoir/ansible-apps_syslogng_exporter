@@ -1,5 +1,5 @@
 ---
-- name: "restart syslogng_exporter"
+- name: "Restart syslogng_exporter"
   ansible.builtin.service:
     name: "syslogng_exporter"
     state: "restarted"

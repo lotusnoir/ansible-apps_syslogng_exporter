@@ -13,7 +13,7 @@
         name: "ca-certificates"
         state: present
 
-    - name: download syslogng_exporter...
+    - name: Download syslogng_exporter...
       ansible.builtin.get_url:
         url: '{{ syslogng_exporter_url }}'
         dest: /usr/local/bin/syslogng-exporter
@@ -25,7 +25,7 @@
     src: "syslogng_exporter.service.j2"
     dest: "/lib/systemd/system/syslogng_exporter.service"
     mode: 0644
-  notify: "restart syslogng_exporter"
+  notify: "Restart syslogng_exporter"
 
 - name: Start syslogng_exporter.service
   ansible.builtin.service:
