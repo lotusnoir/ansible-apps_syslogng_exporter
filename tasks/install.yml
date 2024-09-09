@@ -1,5 +1,5 @@
 ---
-- name: Check for syslogng_exporter binary
+- name: "Check for syslogng_exporter binary"
   ansible.builtin.stat:
     path: "/usr/local/bin/syslogng-exporter"
   changed_when: false
@@ -12,22 +12,26 @@
       ansible.builtin.package:
         name: "ca-certificates"
         state: present
+      register: pkg_result
+      retries: 12
+      delay: 10
+      until: pkg_result is success
 
-    - name: Download syslogng_exporter...
+    - name: "Download syslogng_exporter..."
       ansible.builtin.get_url:
         url: '{{ syslogng_exporter_url }}'
         dest: /usr/local/bin/syslogng-exporter
         timeout: 120
-        mode: 0755
+        mode: '0755'
 
-- name: Create symtemd for syslogng_exporter
+- name: "Create symtemd for syslogng_exporter"
   ansible.builtin.template:
     src: "syslogng_exporter.service.j2"
     dest: "/lib/systemd/system/syslogng_exporter.service"
-    mode: 0644
+    mode: '0644'
   notify: "Restart syslogng_exporter"
 
-- name: Start syslogng_exporter.service
+- name: "Start syslogng_exporter.service"
   ansible.builtin.service:
     name: syslogng_exporter
     state: started
